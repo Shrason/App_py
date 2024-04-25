@@ -1,28 +1,18 @@
-
-from openai import OpenAI 
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_community.vectorstores import Chroma
 import streamlit as st
 
-f = open("keys\.openai_api_key.txt")
-key = f.read()
-client =OpenAI(api_key= key)
+embedding_model = GoogleGenerativeAIEmbeddings(google_api_key='AIzaSyDPuLLK_0j5B1yDRvUcZQFcVibSx__yZiU',model='models/embedding-001')
+db_connection = Chroma(persist_directory='rag_db_ copy', embedding_function=embedding_model)
+retriever = db_connection.as_retriever(search_kwargs={"k":5})
 
-st.title("Python Code Review")
-prompt = st.text_input("Enter your Python code for review:")
+st.title('RAG App')
 
-if st.button("Review Code") == True:
-  
-  response = client.chat.completions.create(
-          model='gpt-3.5-turbo-16k',
-          messages = [
-              {'role' : 'system', 'content' : """You are the helpful Assistant. Given a python code you always check for bugs in the code
-                                          and provide both the original python code and the debugged code"""},
-              {'role':'user','content':"prompt"}
-          ]
-      )
+user_input = st.text_input('Enter your query here')
 
-  st.write(response.choices[0].message.content)
-
-
-
+if st.button('Submit') == True:
     
-   
+    retriever_docs = retriever.invoke(user_input)  
+    
+    st.write(retriever_docs)
+
