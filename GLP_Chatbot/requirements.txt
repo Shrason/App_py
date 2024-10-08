@@ -160,7 +160,6 @@ PyStemmer==2.2.0.1
 python-dateutil==2.8.2
 python-dotenv==1.0.1
 pytz==2024.2
-pywin32==306
 PyYAML==6.0.2
 qdrant-client==1.9.1
 quadrant==1.0
