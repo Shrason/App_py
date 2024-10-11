@@ -45,7 +45,6 @@ graphql-core==3.2.4
 graphql-relay==3.2.0
 greenlet==3.1.1
 grpcio==1.66.2
-grpcio-tools==1.66.2
 h11==0.14.0
 h2==4.1.0
 hpack==4.0.0
@@ -88,7 +87,6 @@ marshmallow==3.22.0
 matplotlib==3.9.2
 mdurl==0.1.2
 mlflow==2.16.2
-mlflow-skinny==2.16.2
 mock==4.0.3
 multidict==6.1.0
 mypy-extensions==1.0.0
@@ -138,7 +136,6 @@ ruamel.yaml.clib==0.2.8
 s3transfer==0.10.3
 safety==3.2.8
 safety-schemas==0.0.5
-sagemaker==2.232.2
 sagemaker-core==1.0.10
 sagemaker-mlflow==0.1.0
 schema==0.7.7
