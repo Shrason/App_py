@@ -1,8 +1,8 @@
 import streamlit as st
-from llama_def import create_index, create_query_engine
-from llama_def import setup_llm, setup_embed_model, setup_vector_store
+from llama_func import create_index, create_query_engine
+from llama_func import setup_llm, setup_embed_model, setup_vector_store
 from llama_index.core.settings import Settings
-from llama_def import create_query_pipeline
+from llama_func import create_query_pipeline
 from llama_index.core.query_pipeline import InputComponent
 from llama_index.core import StorageContext
 from dotenv import load_dotenv
