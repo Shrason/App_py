@@ -75,7 +75,7 @@ def answer_question(question):
 
             # Create a Jinja2 template
             template = Template("""
-                **Key Points:**
+                **Response:**
                 {% for point in sentences %}
                 - {{ point }}
                 {% endfor %}
@@ -89,8 +89,7 @@ def answer_question(question):
     else:
         return "Sorry, I couldn't find an answer to your question."
     
-st.title("Conversatonal AI Chatbot")
-st.subheader("OECD GLP Documents!!!")
+st.title("OECD GLP Document Chatbot")
 
 # Initialize session state for user_question and response
 if 'user_question' not in st.session_state:
@@ -108,12 +107,25 @@ if st.button("Submit"):
 
 if st.session_state.response:
     st.write(st.session_state.response)
+    
 
 if st.button("Metadata"):
     response = query_pipeline.run(input=st.session_state.user_question)
     st.session_state.metadata = response.metadata
-    st.write(st.session_state.metadata)
-        
+    
+   # Extract the specific metadata dictionary
+    metadata_key = list(st.session_state.metadata.keys())[0]
+    specific_metadata = st.session_state.metadata.get(metadata_key, {})
+    
+    # Ensure specific_metadata contains the expected keys
+    page_number = specific_metadata.get('page_number', 'N/A')
+    title = specific_metadata.get('title', 'N/A')
+    
+    # Display the extracted metadata
+    st.write(f"Document: {title}")
+    st.write(f"Page Number: {page_number}")
+    
+
 if st.button("Clear"):
     st.session_state.user_question = ""
     st.session_state.response = ""
